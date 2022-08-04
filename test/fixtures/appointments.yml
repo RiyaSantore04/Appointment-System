@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  counsellor: 1
+  customer: 1
+  date: 2022-08-04
+  time: 2022-08-04 17:21:05
+
+two:
+  counsellor: 1
+  customer: 1
+  date: 2022-08-04
+  time: 2022-08-04 17:21:05
