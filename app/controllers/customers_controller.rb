@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class CustomersController < ApplicationController
   before_action :authentication
 
@@ -9,13 +8,13 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.new(counsellor_id: params[:counsellor_id],customer_id: params[:customer_id],time: params[:time])
-      if @appointment.save
-        render json: @appointment, status: 201
-      else
-        render json: { errors: @appointment.errors.full_messages },
-               status: :unprocessable_entity
-      end
+    @appointment = Appointment.new(appointment_params)
+    if @appointment.save
+      render json: @appointment, status: 201
+    else
+      render json: { errors: @appointment.errors.full_messages },
+      status: :unprocessable_entity
+    end
   end
 
   def update
@@ -29,9 +28,9 @@ class CustomersController < ApplicationController
     end
   end
 
-  def show
-    user = User.find(params[:counsellor_id])
-    
-  end
+  private
 
+  def appointment_params
+    params.require(:appointment).permit(:counsellor_id, :customer_id, :time)  
+  end
 end

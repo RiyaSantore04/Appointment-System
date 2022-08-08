@@ -1,7 +1,7 @@
 class FeedbacksController < ApplicationController
 
 	def create
-		@feedback = Feedback.new(counsellor_id: params[:counsellor_id],customer_id: params[:customer_id],description: params[:description] )
+		@feedback = Feedback.new(feedback_params)
 		if @feedback.save
 			render json: @feedback, status: 201
 		else
@@ -14,6 +14,12 @@ class FeedbacksController < ApplicationController
 		@feedback = Feedback.find(params[:id])
         @feedback.destroy
         render json: {message: "deleted successfully" },
-			status: :unprocessable_entity
+        status: :unprocessable_entity
+	end
+
+	private
+
+	def feedback_params
+		params.require(:feedback).permit(:counsellor_id, :customer_id, :description)  
 	end
 end

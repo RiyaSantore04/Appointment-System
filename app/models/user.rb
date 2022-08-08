@@ -8,5 +8,5 @@ class User < ApplicationRecord
     counsellor: '0',
     customer: '1'
   }
-  validates :email, uniqueness: { message: ' Already Exists' }
+  validates :email, uniqueness: { message: 'Already Exists' }
 end
