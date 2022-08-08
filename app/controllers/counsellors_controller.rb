@@ -5,7 +5,7 @@ class CounsellorsController < ApplicationController
 
   def index
     @users = User.where(user_type: 'counsellor')
-    render json: @users, status: :ok
+    render json: @users, status: 200
   end
 
   def create
@@ -13,7 +13,7 @@ class CounsellorsController < ApplicationController
     if user.user_type == 'counsellor'
       @service = Service.new(counsellor_id: params[:counsellor_id], service_name: params[:service_name])
       if @service.save
-        render json: @service, status: :created
+        render json: @service, status: 201
       else
         render json: { errors: @service.errors.full_messages },
                status: :unprocessable_entity

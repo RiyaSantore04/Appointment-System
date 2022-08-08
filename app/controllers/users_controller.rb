@@ -4,11 +4,7 @@ class UsersController < ApplicationController
   before_action :authentication
 
   def index
-    @users = if params[:search].blank?
-               User.all
-             else
-               User.where('name LIKE ? ', "%#{params[:search]}%").where(user_type: 'counsellor')
-             end
-    render json: @users, status: :ok
+    @users = User.all
+    render json: @users, status: 200
   end
 end

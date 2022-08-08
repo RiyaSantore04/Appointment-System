@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 	SECRET = "yoursecretword"
-  
+
   def current_user
     decode_data = decode_user_data(request.headers["token"])
     user_data = decode_data[0]["user_data"] unless !decode_data
