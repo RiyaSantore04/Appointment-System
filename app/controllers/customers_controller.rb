@@ -28,6 +28,20 @@ class CustomersController < ApplicationController
     end
   end
 
+  def show
+    user = User.find(params[:id])
+    appointment = user.appointments.all.pluck(:time).map{|appointment| appointment.strftime('%I:%M')}
+    from = "11:00".to_time.strftime('%I:%M')
+    to = "20:00".to_time.strftime('%I:%M') 
+    time = [from]
+    loop do
+      break if time.last == to
+      time << (time.last.to_time + 3600).strftime('%I:%M')
+    end
+    available_time = time - appointment
+    render json: available_time, status: 200
+  end
+
   private
 
   def appointment_params
